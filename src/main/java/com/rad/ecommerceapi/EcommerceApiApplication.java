@@ -18,5 +18,6 @@ public class EcommerceApiApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         dbInitService.initUsers();
+        dbInitService.initCategories();
     }
 }

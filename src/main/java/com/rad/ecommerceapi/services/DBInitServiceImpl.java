@@ -1,6 +1,8 @@
 package com.rad.ecommerceapi.services;
 
+import com.rad.ecommerceapi.dao.CategoryRepository;
 import com.rad.ecommerceapi.dao.UserRepository;
+import com.rad.ecommerceapi.entities.Category;
 import com.rad.ecommerceapi.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import java.util.Random;
 @Transactional
 public class DBInitServiceImpl implements DBInitService {
     @Autowired private UserRepository userRepository;
+    @Autowired private CategoryRepository categoryRepository;
     @Override
     public void initUsers() {
         for(int i = 0; i < 5; i++){
@@ -50,5 +53,14 @@ public class DBInitServiceImpl implements DBInitService {
     @Override
     public void initProducts() {
 
+    }
+
+    @Override
+    public void initCategories() {
+        for(int i = 0; i < 5; i++){
+            Category category = new Category();
+            category.setName("category"+(i+1));
+            categoryRepository.save(category);
+        }
     }
 }

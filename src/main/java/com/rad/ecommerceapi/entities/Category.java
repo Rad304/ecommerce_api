@@ -16,6 +16,10 @@ public class Category {
     private Long id;
     private String name;
     //Foreign keys
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    private Category parent;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "parent")
+    private Collection<Category> children;
     @OneToMany(mappedBy = "category")
     private Collection<Product> products;
 }

@@ -1,8 +1,10 @@
 package com.rad.ecommerceapi.services;
 
 import com.rad.ecommerceapi.dao.CategoryRepository;
+import com.rad.ecommerceapi.dao.ShoppingcartRepository;
 import com.rad.ecommerceapi.dao.UserRepository;
 import com.rad.ecommerceapi.entities.Category;
+import com.rad.ecommerceapi.entities.Shoppingcart;
 import com.rad.ecommerceapi.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import java.util.Random;
 public class DBInitServiceImpl implements DBInitService {
     @Autowired private UserRepository userRepository;
     @Autowired private CategoryRepository categoryRepository;
+    @Autowired private ShoppingcartRepository shoppingcartRepository;
     @Override
     public void initUsers() {
         for(int i = 0; i < 5; i++){
@@ -47,7 +50,11 @@ public class DBInitServiceImpl implements DBInitService {
 
     @Override
     public void initShoppingcarts() {
-
+        userRepository.findAll().forEach((user -> {
+            Shoppingcart shoppingcart = new Shoppingcart();
+            shoppingcart.setUser(user);
+            shoppingcartRepository.save(shoppingcart);
+        }));
     }
 
     @Override
@@ -61,6 +68,13 @@ public class DBInitServiceImpl implements DBInitService {
             Category category = new Category();
             category.setName("category"+(i+1));
             categoryRepository.save(category);
+            int randomNbofChildrens = new Random().nextInt(3);
+            for(int j = 0; j < randomNbofChildrens; j++){
+                Category subcategory = new Category();
+                subcategory.setName("categories"+(i+1) + " children" + (j+1));
+                subcategory.setParent(category);
+                categoryRepository.save(subcategory);
+            }
         }
     }
 }

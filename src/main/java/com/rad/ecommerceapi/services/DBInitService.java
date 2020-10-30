@@ -5,6 +5,7 @@ public interface DBInitService {
     public void initOrders();
     public void initOrderItems();
     public void initShoppingcarts();
+    public void initShoppingcartItems();
     public void initProducts();
     public void initCategories();
     public void initFavorites();

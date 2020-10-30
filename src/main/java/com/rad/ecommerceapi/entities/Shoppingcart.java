@@ -1,14 +1,14 @@
 package com.rad.ecommerceapi.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Data @AllArgsConstructor @NoArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor @NoArgsConstructor
 @Table(name = "shoppingcarts")
 public class Shoppingcart {
     @Id
@@ -17,7 +17,7 @@ public class Shoppingcart {
     //foreign keys
     @OneToOne
     private User user;
-    @OneToMany(mappedBy = "shoppingcart")
+    @OneToMany(mappedBy = "shoppingcart", cascade = CascadeType.ALL)
     private Set<ShoppingcartProduct> shoppingcartProducts;
 
 }

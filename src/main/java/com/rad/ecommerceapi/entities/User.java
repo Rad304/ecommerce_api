@@ -1,8 +1,7 @@
 package com.rad.ecommerceapi.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -11,7 +10,9 @@ import java.util.Set;
 
 
 @Entity
-@Data @AllArgsConstructor @NoArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor @NoArgsConstructor
 @Table(name = "users")
 public class User {
     @Id

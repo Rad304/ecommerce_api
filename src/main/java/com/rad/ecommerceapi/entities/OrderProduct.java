@@ -1,24 +1,27 @@
 package com.rad.ecommerceapi.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 
 import javax.persistence.*;
+import java.io.Serializable;
+
 
 @Entity
-@Data @AllArgsConstructor @NoArgsConstructor
-public class OrderProduct {
-    @EmbeddedId
-    OrderProductKey id;
+@Table(name = "order_product")
+@Getter
+@Setter
+@AllArgsConstructor @NoArgsConstructor
+@IdClass(OrderProductKey.class)
+public class OrderProduct implements Serializable{
 
+    @Id
     @ManyToOne
-    @MapsId("orderId")
     @JoinColumn(name = "order_id")
     private Order order;
 
+    @Id
     @ManyToOne
-    @MapsId("productId")
     @JoinColumn(name = "product_id")
     private Product product;
 

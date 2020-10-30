@@ -1,8 +1,6 @@
 package com.rad.ecommerceapi.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,7 +8,9 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Data @AllArgsConstructor @NoArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor @NoArgsConstructor
 @Table(name = "products")
 public class Product implements Serializable {
     @Id
@@ -28,8 +28,8 @@ public class Product implements Serializable {
     private Category category;
     @ManyToMany(mappedBy = "favorites")
     private Set<User> favorites;
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private Set<ShoppingcartProduct> shoppingcartProducts;
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private Set<OrderProduct> orderProducts;
 }

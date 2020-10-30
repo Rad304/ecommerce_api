@@ -20,5 +20,9 @@ public class EcommerceApiApplication implements CommandLineRunner {
         dbInitService.initUsers();
         dbInitService.initCategories();
         dbInitService.initShoppingcarts();
+        dbInitService.initProducts();
+        dbInitService.initFavorites();
+        dbInitService.initOrders();
+        dbInitService.initOrderItems();
     }
 }

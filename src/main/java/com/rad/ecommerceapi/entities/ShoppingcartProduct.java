@@ -1,24 +1,24 @@
 package com.rad.ecommerceapi.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data @AllArgsConstructor @NoArgsConstructor
+@Table(name = "shoppingcart_product")
+@Getter
+@Setter
+@AllArgsConstructor @NoArgsConstructor
+@IdClass(ShoppingcartProductKey.class)
 public class ShoppingcartProduct {
-    @EmbeddedId
-    ShoppingcartProductKey id;
 
+    @Id
     @ManyToOne
-    @MapsId("shoppingcardId")
     @JoinColumn(name = "shoppingcart_id")
     Shoppingcart shoppingcart;
 
+    @Id
     @ManyToOne
-    @MapsId("productId")
     @JoinColumn(name = "product_id")
     Product product;
 

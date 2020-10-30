@@ -9,6 +9,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor @AllArgsConstructor
 public class ShoppingcartProductKey implements Serializable {
+
     private Shoppingcart shoppingcart;
     private Product product;
 

@@ -3,6 +3,7 @@ package com.rad.ecommerceapi.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "shoppingcart_product")
@@ -10,17 +11,17 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor @NoArgsConstructor
 @IdClass(ShoppingcartProductKey.class)
-public class ShoppingcartProduct {
+public class ShoppingcartProduct implements Serializable {
 
     @Id
     @ManyToOne
     @JoinColumn(name = "shoppingcart_id")
-    Shoppingcart shoppingcart;
+    private Shoppingcart shoppingcart;
 
     @Id
     @ManyToOne
     @JoinColumn(name = "product_id")
-    Product product;
+    private Product product;
 
     int quantity;
 }

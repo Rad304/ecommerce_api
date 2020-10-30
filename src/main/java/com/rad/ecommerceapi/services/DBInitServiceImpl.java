@@ -93,6 +93,24 @@ public class DBInitServiceImpl implements DBInitService {
     }
 
     @Override
+    public void initShoppingcartItems() {
+        shoppingcartRepository.findAll().forEach(shoppingcart -> {
+            productRepository.findAll().forEach(product -> {
+                if(Math.random() < 0.3) {
+                    ShoppingcartProduct shoppingcartItem = new ShoppingcartProduct();
+                    shoppingcartItem.setShoppingcart(shoppingcart);
+                    shoppingcartItem.setProduct(product);
+                    shoppingcartItem.setQuantity(new Random().nextInt(2) + 1);
+                    shoppingcart.getShoppingcartProducts().add(shoppingcartItem);
+                    product.getShoppingcartProducts().add(shoppingcartItem);
+                    productRepository.save(product);
+                }
+            });
+            shoppingcartRepository.save(shoppingcart);
+        });
+    }
+
+    @Override
     public void initProducts() {
         double rangeMin = 10;
         double rangeMax = 500;

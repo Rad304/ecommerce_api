@@ -19,9 +19,10 @@ public class EcommerceApiApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         dbInitService.initUsers();
         dbInitService.initCategories();
-        dbInitService.initShoppingcarts();
         dbInitService.initProducts();
         dbInitService.initFavorites();
+        dbInitService.initShoppingcarts();
+        dbInitService.initShoppingcartItems();
         dbInitService.initOrders();
         dbInitService.initOrderItems();
     }

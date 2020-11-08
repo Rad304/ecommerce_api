@@ -1,6 +1,7 @@
 package com.rad.ecommerceapi.services;
 
 public interface DBInitService {
+    public void initRoles();
     public void initUsers();
     public void initOrders();
     public void initOrderItems();

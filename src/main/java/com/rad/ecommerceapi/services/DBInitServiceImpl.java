@@ -15,11 +15,22 @@ import java.util.Random;
 @Service("DBInitService")
 @Transactional
 public class DBInitServiceImpl implements DBInitService {
+    @Autowired private RoleRepository roleRepository;
     @Autowired private UserRepository userRepository;
     @Autowired private CategoryRepository categoryRepository;
     @Autowired private ShoppingcartRepository shoppingcartRepository;
     @Autowired private ProductRepository productRepository;
     @Autowired private OrderRepository orderRepository;
+
+    @Override
+    public void initRoles() {
+        ERole roles[] = ERole.values();
+        for(ERole eRole: roles){
+            Role role = new Role();
+            role.setName(eRole);
+            roleRepository.save(role);
+        }
+    }
 
     @Override
     public void initUsers() {
@@ -36,11 +47,11 @@ public class DBInitServiceImpl implements DBInitService {
             user.setEmail("user"+(i+1)+"@example.com");
             user.setAddress("user"+(i+1)+" address");
             user.setPassword("123");
-            if (Math.random() < 0.5) {
-                user.setRole("user");
+            /*if (Math.random() < 0.5) {
+                user.getRoles().add();
             } else {
                 user.setRole("admin");
-            }
+            }*/
             user.setTel("0000000000");
             userRepository.save(user);
         }
